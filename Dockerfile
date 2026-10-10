@@ -10,7 +10,7 @@ COPY /src ./src
 
 RUN mvn package
 
-FROM eclipse-temurin:21-jre-alpinie AS runner
+FROM eclipse-temurin:21-jre-alpine AS runner
 
 COPY --from=builder /app/target/*.jar ./app.jar
 
