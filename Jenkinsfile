@@ -31,7 +31,7 @@ pipeline{
 
         stage("Test Application"){
             steps{
-                catchError(buildResult: 'SUCCESS', stageResult:'ERROR'){
+                catchError(buildResult: 'SUCCESS', stageResult:'FAILURE'){
                     sh "mvn test"
                 }
 
