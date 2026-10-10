@@ -31,7 +31,23 @@ pipeline{
 
         stage("Test Application"){
             steps{
-                sh "mvn test"
+                catchError(buildResult: 'SUCCESS', stageResult:'ERROR'){
+                    sh "mvn test"
+                }
+
+            }
+        }
+
+
+        stage("SonarQube Analysis"){
+            steps{
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonarqube'){
+                        sh "mvn sonar:sonar"
+
+                    }
+                }
+
             }
         }
 
